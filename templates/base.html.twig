@@ -1,16 +1,54 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
-        {% block stylesheets %}
-        {% endblock %}
-
-        {% block javascripts %}
-        {% endblock %}
-    </head>
-    <body>
-        {% block body %}{% endblock %}
-    </body>
-</html>
+	<head>
+		<meta charset="UTF-8">
+		<title>
+			{% block title %}Welcome!
+			{% endblock %}
+		</title>
+		<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
+		<link href="https://cdn.jsdelivr.net/npm/bootswatch@4.5.2/dist/cosmo/bootstrap.min.css" rel="stylesheet"> {% block stylesheets %}{% endblock %}{% block javascripts %}{% endblock %}
+		</head>
+		<body>
+			<nav class="navbar navbar-expand-lg bg-dark" data-bs-theme="dark">
+				<div class="container-fluid">
+					<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+						<span class="navbar-toggler-icon"></span>
+					</button>
+					<div class="collapse navbar-collapse " id="navbarColor02">
+						<ul class="navbar-nav me-auto text-center">
+							<li class="nav-item">
+								<a class="nav-link active" href="/">Accueil</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" href="/blague">Blague</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" href="/categorie">Catégorie</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+				{% if is_granted('ROLE_USER') -%}
+					<div class="d-grid gap-2">
+						<a href="/logout">
+							<button class="btn btn-lg btn-secondary " type="button">Logout</button>
+						</a>
+					</div>
+				{% else %}
+					<div class="d-grid gap-2">
+						<a href="/login">
+							<button class="btn btn-lg btn-secondary " type="button">Login</button>
+						</a>
+					</div>
+                    <div class="d-grid gap-2">
+						<a href="/register">
+							<button class="btn btn-lg btn-secondary " type="button">new account</button>
+						</a>
+					</div>
+				{%- endif %}
+			</body>
+		</body>
+	</html>
+</nav>
+{% block body %}{% endblock %}</body></html>
